@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JMS AlogDEV - Custom Indicators & Expert Advisors</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>JMS<span class="accent">AlogDEV</span></h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link active">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="services.html" class="nav-link">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background">
+            <canvas id="particlesCanvas"></canvas>
+            <canvas id="chartCanvas"></canvas>
+        </div>
+        <div class="hero-content">
+            <div class="container">
+                <h1 class="hero-title">
+                    <span class="title-main headline-animate headline-neon" id="headlineMain">UNLOCK PROFITS</span>
+                    <span class="title-sub headline-animate headline-neon" id="headlineSub">WITH INTELLIGENT AUTOMATION</span>
+                </h1>
+                <p class="hero-subtitle">
+                    We build Custom Indicators & Expert Advisors for TradingView and MQL5
+                </p>
+                <div class="hero-buttons">
+                    <a href="contact.html" class="btn btn-primary">Get Started</a>
+                    <a href="services.html" class="btn btn-secondary">Request a Strategy</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Highlights -->
+    <section class="services-highlights">
+        <div class="container">
+            <h2 class="section-title">Our Expertise</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Custom Indicators</h3>
+                    <p>Advanced technical indicators tailored to your trading strategy with real-time alerts and notifications.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Expert Advisors</h3>
+                    <p>Fully automated trading systems for MQL5 that execute trades based on your predefined strategies.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Strategy Automation</h3>
+                    <p>End-to-end automation solutions that transform your manual strategies into profitable automated systems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="features-content">
+                <div class="features-text">
+                    <h2>Why Choose Our Solutions?</h2>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Proven track record with 500+ successful implementations</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>24/7 monitoring and support for all automated systems</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Custom backtesting and optimization services</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Seamless integration with TradingView and MetaTrader 5</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="features-visual">
+                    <div class="trading-dashboard">
+                        <div class="dashboard-header">
+                            <div class="dashboard-title">Live Trading Dashboard</div>
+                            <div class="status-indicator">
+                                <span class="status-dot"></span>
+                                <span>Active</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-content">
+                            <div class="metric">
+                                <span class="metric-label">Total P&L</span>
+                                <span class="metric-value positive">+$12,450</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Win Rate</span>
+                                <span class="metric-value">78.5%</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Active Strategies</span>
+                                <span class="metric-value">12</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Automate Your Trading?</h2>
+                <p>Join hundreds of successful traders who have automated their strategies with our solutions.</p>
+                <a href="contact.html" class="btn btn-primary btn-large">Start Your Project Today</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>JMS<span class="accent">AlogDEV</span></h3>
+                    <p>Empowering traders with cutting-edge automation technology.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html">Custom Indicators</a></li>
+                        <li><a href="services.html">Expert Advisors</a></li>
+                        <li><a href="services.html">Strategy Automation</a></li>
+                        <li><a href="services.html">Backtesting</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="disclaimer">
+                    Trading involves risk. Past performance is not indicative of future results. 
+                    Please trade responsibly and only invest what you can afford to lose.
+                </p>
+                <p>&copy; 2024 JMS AlogDEV. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

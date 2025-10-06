@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - JMS AlogDEV</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>JMS<span class="accent">AlogDEV</span></h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="services.html" class="nav-link">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link active">Contact</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Contact Us</h1>
+            <p class="page-subtitle">Let's discuss your trading automation needs</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-photo">
+                        <div class="photo-placeholder">
+                            <i class="fas fa-user"></i>
+                            <span>CEO Photo</span>
+                        </div>
+                    </div>
+                    <div class="contact-details">
+                        <h2>Mitran Thanasingh</h2>
+                        <p class="designation">CEO & Lead Developer</p>
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <i class="fas fa-envelope"></i>
+                                <span>mitrathanasingh2000@gmail.com</span>
+                            </div>
+                            <div class="contact-method">
+                                <i class="fab fa-telegram"></i>
+                                <span>@fintechsolutions</span>
+                            </div>
+                            <div class="contact-method">
+                                <i class="fab fa-discord"></i>
+                                <span>FinTechSolutions#1234</span>
+                            </div>
+                            <div class="contact-method">
+                                <i class="fab fa-linkedin"></i>
+                                <span>linkedin.com/in/johnsmith</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-container">
+                    <form class="contact-form" id="contactForm">
+                        <h3>Send us a message</h3>
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="countryCode">Country Code</label>
+                            <select id="countryCode" name="countryCode">
+                                <option value="+1">+1 (US)</option>
+                                <option value="+44">+44 (UK)</option>
+                                <option value="+61">+61 (AU)</option>
+                                <option value="+91">+91 (IN)</option>
+                                <option value="+94">+94 (LK)</option>
+                                <option value="+971">+971 (AE)</option>
+                                <option value="+81">+81 (JP)</option>
+                                <option value="+49">+49 (DE)</option>
+                                <option value="+33">+33 (FR)</option>
+                                <option value="+27">+27 (ZA)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Mobile Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="e.g. +1 555 123 4567">
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Service Interest</label>
+                            <select id="service" name="service">
+                                <option value="">Select a service</option>
+                                <option value="indicators">TradingView Indicators</option>
+                                <option value="expert-advisors">MQL5 Expert Advisors</option>
+                                <option value="automation">Strategy Automation</option>
+                                <option value="backtesting">Backtesting & Optimization</option>
+                                <option value="consultation">General Consultation</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Tell us about your trading strategy and automation needs..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>How long does it take to develop a custom indicator?</h3>
+                    <p>Typically 1-2 weeks for simple indicators, 2-4 weeks for complex multi-timeframe indicators with advanced features.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Do you provide support after deployment?</h3>
+                    <p>Yes, we offer 24/7 monitoring and support for all our automated trading solutions with regular updates and optimizations.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Can you work with existing trading strategies?</h3>
+                    <p>Absolutely! We can analyze and automate your existing manual strategies, optimizing them for better performance.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What platforms do you support?</h3>
+                    <p>We specialize in TradingView (Pine Script) and MetaTrader 5 (MQL5), with experience in other platforms upon request.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Do you offer backtesting services?</h3>
+                    <p>Yes, we provide comprehensive backtesting using historical data to validate and optimize your strategies before live deployment.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What are your pricing models?</h3>
+                    <p>We offer flexible pricing based on project complexity, from one-time development fees to ongoing support packages.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Start Your Project?</h2>
+                <p>Get in touch today and let's discuss how we can help automate your trading strategies.</p>
+                <a href="#contactForm" class="btn btn-primary btn-large">Contact Us Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>JMS<span class="accent">AlogDEV</span></h3>
+                    <p>Empowering traders with cutting-edge automation technology.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html">Custom Indicators</a></li>
+                        <li><a href="services.html">Expert Advisors</a></li>
+                        <li><a href="services.html">Strategy Automation</a></li>
+                        <li><a href="services.html">Backtesting</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="disclaimer">
+                    Trading involves risk. Past performance is not indicative of future results. 
+                    Please trade responsibly and only invest what you can afford to lose.
+                </p>
+                <p>&copy; 2024 JMS AlogDEV. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
