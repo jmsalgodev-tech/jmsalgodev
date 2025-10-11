@@ -461,131 +461,277 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Contact form handling
+// Contact form handling with popup
 document.addEventListener('DOMContentLoaded', () => {
-    // Google Apps Script endpoint (recommended, uses your Gmail to send)
-    // Deploy a Web App in Apps Script and paste the URL below
-    const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbygcwkSzOoMWXEt-1rHvJGhkFjUM4DGn_d3Jtboah9Mwp0zDrgA93PVSKA5h2LlxC0NOQ/exec';
-
-    // EmailJS config (replace with your real IDs)
-    const EMAILJS_PUBLIC_KEY = 'YOUR_EMAILJS_PUBLIC_KEY';
-    const EMAILJS_SERVICE_ID = 'YOUR_EMAILJS_SERVICE_ID';
-    const EMAILJS_TEMPLATE_USER_WELCOME = 'YOUR_TEMPLATE_ID_WELCOME_USER';
-    const EMAILJS_TEMPLATE_NOTIFY_CEO = 'YOUR_TEMPLATE_ID_NOTIFY_CEO';
-    const CEO_EMAIL = 'mitrathanasingh2000@gmail.com';
-
-    // SMTP.js (client-side SMTP) config — WARNING: exposes token in client. Prefer a serverless proxy in production.
-    const SMTP_ENABLED = true; // set to true to use SMTP.js path
-    const SMTP_SECURE_TOKEN = 'YOUR_SMTPJS_SECURE_TOKEN'; // e.g., from smtpjs.com (Elastic Email token) or leave '' to disable
-    const SMTP_FROM = 'no-reply@yourdomain.com'; // must be a verified sender with your SMTP provider
-
-    // Initialize EmailJS if available
-    if (window.emailjs && EMAILJS_PUBLIC_KEY && EMAILJS_PUBLIC_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY') {
-        try { window.emailjs.init(EMAILJS_PUBLIC_KEY); } catch (_) {}
-    }
-
+    // Contact method popup elements
+    const popup = document.getElementById('contactMethodPopup');
+    const sendMessageBtn = document.getElementById('sendMessageBtn');
+    const closePopupBtn = document.getElementById('closePopup');
+    const whatsappBtn = document.getElementById('whatsappBtn');
+    const emailBtn = document.getElementById('emailBtn');
     const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
+
+    // WhatsApp number
+    const WHATSAPP_NUMBER = '7010152043';
+    const EMAIL_ADDRESS = 'jmsalgodev@gmail.com';
+
+    // Show popup when send message button is clicked
+    if (sendMessageBtn) {
+        sendMessageBtn.addEventListener('click', (e) => {
             e.preventDefault();
             
-            // Get form data
-            const formData = new FormData(contactForm);
-            const data = Object.fromEntries(formData);
-            const params = {
-                from_name: data.name || 'Guest',
-                from_email: data.email || '',
-                phone: `${data.countryCode || ''} ${data.phone || ''}`.trim(),
-                service_interest: data.service || 'General',
-                message: data.message || '',
-                to_email_user: data.email || '',
-                to_email_ceo: CEO_EMAIL
-            };
-
-            const canSendGAS = Boolean(GAS_ENDPOINT);
-            const canSendEmailJS = Boolean(window.emailjs && EMAILJS_PUBLIC_KEY && EMAILJS_PUBLIC_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY' && EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_USER_WELCOME && EMAILJS_TEMPLATE_NOTIFY_CEO);
-            const canSendSMTP = Boolean(window.Email && SMTP_ENABLED && SMTP_SECURE_TOKEN && SMTP_SECURE_TOKEN !== 'YOUR_SMTPJS_SECURE_TOKEN' && SMTP_FROM);
-
-            const submitBtn = contactForm.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            
-            submitBtn.textContent = 'Sending...';
-            submitBtn.disabled = true;
-
-            const finish = (ok) => {
-                submitBtn.textContent = ok ? 'Message Sent!' : 'Failed. Try Again';
-                submitBtn.style.background = ok ? 'linear-gradient(45deg, #00ff88, #00d4ff)' : '';
-                setTimeout(() => {
-                    submitBtn.textContent = originalText;
-                    submitBtn.disabled = false;
-                    submitBtn.style.background = '';
-                    if (ok) contactForm.reset();
-                }, 2000);
-            };
-
-            if (!canSendGAS && !canSendEmailJS && !canSendSMTP) {
-                // Fallback: simulate success visually
-                setTimeout(() => finish(true), 1200);
+            // Validate form before showing popup
+            if (contactForm && !contactForm.checkValidity()) {
+                contactForm.reportValidity();
                 return;
             }
-
-            const sendWithGAS = () => {
-                return fetch(GAS_ENDPOINT, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        from_name: params.from_name,
-                        from_email: params.from_email,
-                        phone: params.phone,
-                        service_interest: params.service_interest,
-                        message: params.message,
-                        to_email_ceo: params.to_email_ceo
-                    })
-                }).then(async (res) => {
-                    if (!res.ok) {
-                        const txt = await res.text().catch(() => '');
-                        console.error('GAS error status:', res.status, txt);
-                        throw new Error('GAS send failed');
-                    }
-                    return res.json().catch(() => ({}));
-                });
-            };
-
-            const sendWithEmailJS = () => {
-                const sendUser = window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_USER_WELCOME, params);
-                const sendCeo = window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_NOTIFY_CEO, params);
-                return Promise.all([sendUser, sendCeo]);
-            };
-
-            const sendWithSMTP = () => {
-                const subjectUser = 'Welcome to JMS AlogDEV';
-                const bodyUser = `Hi ${params.from_name},\n\nThanks for contacting JMS AlogDEV. We received your message about: ${params.service_interest}.\n\nMobile: ${params.phone || 'N/A'}\nMessage:\n${params.message}\n\nWe will get back to you shortly.\n\n— JMS AlogDEV`;
-                const subjectCEO = 'New Contact Form Submission';
-                const bodyCEO = `New inquiry from ${params.from_name} <${params.from_email}>\nMobile: ${params.phone || 'N/A'}\nService: ${params.service_interest}\n\nMessage:\n${params.message}`;
-
-                const sendUserSMTP = window.Email.send({
-                    SecureToken: SMTP_SECURE_TOKEN,
-                    To: params.to_email_user,
-                    From: SMTP_FROM,
-                    Subject: subjectUser,
-                    Body: bodyUser.replace(/\n/g, '<br>')
-                });
-                const sendCeoSMTP = window.Email.send({
-                    SecureToken: SMTP_SECURE_TOKEN,
-                    To: params.to_email_ceo,
-                    From: SMTP_FROM,
-                    Subject: subjectCEO,
-                    Body: bodyCEO.replace(/\n/g, '<br>')
-                });
-                return Promise.all([sendUserSMTP, sendCeoSMTP]);
-            };
-
-            const sender = canSendGAS ? sendWithGAS : (canSendSMTP ? sendWithSMTP : sendWithEmailJS);
-            sender()
-                .then(() => finish(true))
-                .catch(() => finish(false));
+            
+            showPopup();
         });
     }
+
+    // Close popup
+    if (closePopupBtn) {
+        closePopupBtn.addEventListener('click', hidePopup);
+    }
+
+    // Close popup when clicking outside
+    if (popup) {
+        popup.addEventListener('click', (e) => {
+            if (e.target === popup) {
+                hidePopup();
+            }
+        });
+    }
+
+    // Close popup with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && popup && popup.classList.contains('active')) {
+            hidePopup();
+        }
+    });
+
+    // WhatsApp button handler
+    if (whatsappBtn) {
+        whatsappBtn.addEventListener('click', () => {
+            const formData = getFormData();
+            const message = formatWhatsAppMessage(formData);
+            const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            hidePopup();
+            
+            // Show greeting popup after a short delay
+            setTimeout(() => {
+                showGreetingPopup();
+            }, 500);
+        });
+    }
+
+    // Email button handler
+    if (emailBtn) {
+        emailBtn.addEventListener('click', () => {
+            const formData = getFormData();
+            const emailData = formatEmailData(formData);
+            
+            // Show email service selection popup
+            showEmailServicePopup(emailData);
+            hidePopup();
+        });
+    }
+
+    function showPopup() {
+        if (popup) {
+            popup.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function hidePopup() {
+        if (popup) {
+            popup.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+
+    function getFormData() {
+        if (!contactForm) return {};
+        
+        const formData = new FormData(contactForm);
+        return {
+            name: formData.get('name') || '',
+            email: formData.get('email') || '',
+            countryCode: formData.get('countryCode') || '',
+            phone: formData.get('phone') || '',
+            service: formData.get('service') || '',
+            message: formData.get('message') || ''
+        };
+    }
+
+    function formatWhatsAppMessage(data) {
+        let message = `Hello JMS AlogDEV Team! 👋\n\n`;
+        message += `I'm interested in your services. Here are my details:\n\n`;
+        message += `📝 *Name:* ${data.name}\n`;
+        message += `📧 *Email:* ${data.email}\n`;
+        
+        if (data.phone) {
+            message += `📱 *Phone:* ${data.countryCode} ${data.phone}\n`;
+        }
+        
+        if (data.service) {
+            message += `🎯 *Service Interest:* ${data.service}\n`;
+        }
+        
+        message += `\n💬 *Message:*\n${data.message}\n\n`;
+        message += `Looking forward to hearing from you!`;
+        
+        return message;
+    }
+
+    function formatEmailData(data) {
+        const subject = `New Contact Form Submission - ${data.service || 'General Inquiry'}`;
+        
+        let body = `Dear JMS AlogDEV Team,\n\n`;
+        body += `I am interested in your services and would like to get in touch.\n\n`;
+        body += `Contact Information:\n`;
+        body += `Name: ${data.name}\n`;
+        body += `Email: ${data.email}\n`;
+        
+        if (data.phone) {
+            body += `Phone: ${data.countryCode} ${data.phone}\n`;
+        }
+        
+        if (data.service) {
+            body += `Service Interest: ${data.service}\n`;
+        }
+        
+        body += `\nMessage:\n${data.message}\n\n`;
+        body += `Please let me know how we can proceed.\n\n`;
+        body += `Best regards,\n${data.name}`;
+        
+        return { subject, body };
+    }
+
+    function showEmailServicePopup(emailData) {
+        // Create email service selection popup
+        const emailPopup = document.createElement('div');
+        emailPopup.className = 'popup-overlay active';
+        emailPopup.innerHTML = `
+            <div class="popup-content">
+                <div class="popup-header">
+                    <h3>Choose Email Service</h3>
+                    <button class="popup-close" onclick="this.closest('.popup-overlay').remove()">&times;</button>
+                </div>
+                <div class="popup-body">
+                    <p>Select your preferred email service:</p>
+                    <div class="contact-method-options">
+                        <button class="contact-method-btn" onclick="openGmail('${encodeURIComponent(emailData.subject)}', '${encodeURIComponent(emailData.body)}')">
+                            <i class="fab fa-google"></i>
+                            <span>Gmail</span>
+                            <small>Open Gmail web interface</small>
+                        </button>
+                        <button class="contact-method-btn" onclick="openYahooMail('${encodeURIComponent(emailData.subject)}', '${encodeURIComponent(emailData.body)}')">
+                            <i class="fab fa-yahoo"></i>
+                            <span>Yahoo Mail</span>
+                            <small>Open Yahoo Mail web interface</small>
+                        </button>
+                        <button class="contact-method-btn" onclick="openOutlookWeb('${encodeURIComponent(emailData.subject)}', '${encodeURIComponent(emailData.body)}')">
+                            <i class="fab fa-microsoft"></i>
+                            <span>Outlook Web</span>
+                            <small>Open Outlook web interface</small>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(emailPopup);
+        document.body.style.overflow = 'hidden';
+        
+        // Close popup when clicking outside
+        emailPopup.addEventListener('click', (e) => {
+            if (e.target === emailPopup) {
+                emailPopup.remove();
+                document.body.style.overflow = '';
+            }
+        });
+    }
+
+    // Email service functions
+    window.openGmail = function(subject, body) {
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL_ADDRESS}&su=${subject}&body=${body}`;
+        window.open(gmailUrl, '_blank');
+        document.querySelector('.popup-overlay').remove();
+        document.body.style.overflow = '';
+        
+        // Show greeting popup after a short delay
+        setTimeout(() => {
+            showGreetingPopup();
+        }, 500);
+    };
+
+    window.openYahooMail = function(subject, body) {
+        const yahooUrl = `https://compose.mail.yahoo.com/?to=${EMAIL_ADDRESS}&subject=${subject}&body=${body}`;
+        window.open(yahooUrl, '_blank');
+        document.querySelector('.popup-overlay').remove();
+        document.body.style.overflow = '';
+        
+        // Show greeting popup after a short delay
+        setTimeout(() => {
+            showGreetingPopup();
+        }, 500);
+    };
+
+    window.openOutlookWeb = function(subject, body) {
+        const outlookUrl = `https://outlook.live.com/mail/0/compose?to=${EMAIL_ADDRESS}&subject=${subject}&body=${body}`;
+        window.open(outlookUrl, '_blank');
+        document.querySelector('.popup-overlay').remove();
+        document.body.style.overflow = '';
+        
+        // Show greeting popup after a short delay
+        setTimeout(() => {
+            showGreetingPopup();
+        }, 500);
+    };
+
+    // Greeting popup functions
+    function showGreetingPopup() {
+        const greetingPopup = document.getElementById('greetingPopup');
+        if (greetingPopup) {
+            greetingPopup.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function hideGreetingPopup() {
+        const greetingPopup = document.getElementById('greetingPopup');
+        if (greetingPopup) {
+            greetingPopup.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+
+    // Close greeting popup
+    const closeGreetingPopup = document.getElementById('closeGreetingPopup');
+    if (closeGreetingPopup) {
+        closeGreetingPopup.addEventListener('click', hideGreetingPopup);
+    }
+
+    // Close greeting popup when clicking outside
+    const greetingPopup = document.getElementById('greetingPopup');
+    if (greetingPopup) {
+        greetingPopup.addEventListener('click', (e) => {
+            if (e.target === greetingPopup) {
+                hideGreetingPopup();
+            }
+        });
+    }
+
+    // Close greeting popup with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && greetingPopup && greetingPopup.classList.contains('active')) {
+            hideGreetingPopup();
+        }
+    });
 });
 
 // Smooth scrolling for anchor links
