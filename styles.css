@@ -1403,7 +1403,7 @@ h1, h2, h3, h4, h5, h6 {
 
     .hero-title {
         font-size: 2.5rem;
-        text-align: left;
+        text-align: center;
         word-spacing: 0.1em;
         line-height: 1.3;
     }
@@ -1411,9 +1411,9 @@ h1, h2, h3, h4, h5, h6 {
     .title-main,
     .title-sub {
         display: block;
-        word-break: break-word;
-        overflow-wrap: break-word;
-        text-align: left;
+        word-break: keep-all;
+        overflow-wrap: normal;
+        text-align: center;
         white-space: normal;
     }
 
@@ -1482,7 +1482,7 @@ h1, h2, h3, h4, h5, h6 {
 
     .hero-title {
         font-size: 2rem;
-        text-align: left;
+        text-align: center;
         word-spacing: 0.1em;
         line-height: 1.3;
     }
@@ -1490,9 +1490,9 @@ h1, h2, h3, h4, h5, h6 {
     .title-main,
     .title-sub {
         display: block;
-        word-break: break-word;
-        overflow-wrap: break-word;
-        text-align: left;
+        word-break: keep-all;
+        overflow-wrap: normal;
+        text-align: center;
         white-space: normal;
         line-height: 1.3;
     }
@@ -1840,5 +1840,102 @@ h1, h2, h3, h4, h5, h6 {
     
     .greeting-details {
         padding: 1rem;
+    }
+}
+
+/* Trading Widgets Grid */
+.trading-widgets-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+.widget-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+.floating-widget {
+    background: transparent;
+    border-radius: 15px;
+    border: none;
+    padding: 0;
+    box-shadow: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.floating-widget::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.floating-widget:hover::before {
+    left: 100%;
+}
+
+.floating-widget:hover {
+    transform: translateY(-5px);
+}
+
+.floating-widget:nth-child(1) {
+    animation: fadeInUp 0.6s ease-out 0.1s forwards;
+}
+
+.floating-widget:nth-child(2) {
+    animation: fadeInUp 0.6s ease-out 0.2s forwards;
+}
+
+.floating-widget:nth-child(3) {
+    animation: fadeInUp 0.6s ease-out 0.3s forwards;
+}
+
+.floating-widget:nth-child(4) {
+    animation: fadeInUp 0.6s ease-out 0.4s forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile responsive for trading widgets */
+@media (max-width: 768px) {
+    .widget-row {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .trading-widgets-grid {
+        gap: 1.5rem;
+        padding: 1rem 0;
+    }
+    
+    .floating-widget {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .floating-widget {
+        padding: 0.8rem;
     }
 }
