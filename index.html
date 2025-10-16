@@ -51,7 +51,7 @@
                     <span class="title-sub" id="headlineSub">WITH INTELLIGENT AUTOMATION</span>
                 </h1>
                 <p class="hero-subtitle">
-                    We build Custom Indicators & Expert Advisors for TradingView and MQL5
+                    We build Custom Indicators & Expert Advisors
                 </p>
                 <div class="hero-buttons">
                     <a href="contact.html" class="btn btn-primary">Get Started</a>
@@ -117,26 +117,66 @@
                     </div>
                 </div>
                 <div class="features-visual">
-                    <div class="trading-dashboard">
-                        <div class="dashboard-header">
-                            <div class="dashboard-title">Live Trading Dashboard</div>
-                            <div class="status-indicator">
-                                <span class="status-dot"></span>
-                                <span>Active</span>
+                    <div class="trading-widgets-grid">
+                        <!-- Top Row -->
+                        <div class="widget-row">
+                            <!-- XAUUSD Widget -->
+                            <div class="tradingview-widget-container floating-widget">
+                              <div class="tradingview-widget-container__widget"></div>
+                              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+                              {
+                              "symbol": "OANDA:XAUUSD",
+                              "colorTheme": "dark",
+                              "isTransparent": false,
+                              "locale": "en",
+                              "width": 350
+                              }
+                              </script>
+                            </div>
+                            
+                            <!-- XAGUSD Widget -->
+                            <div class="tradingview-widget-container floating-widget">
+                              <div class="tradingview-widget-container__widget"></div>
+                              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+                              {
+                              "symbol": "OANDA:XAGUSD",
+                              "colorTheme": "dark",
+                              "isTransparent": false,
+                              "locale": "en",
+                              "width": 350
+                              }
+                              </script>
                             </div>
                         </div>
-                        <div class="dashboard-content">
-                            <div class="metric">
-                                <span class="metric-label">Total P&L</span>
-                                <span class="metric-value positive">+$12,450</span>
+                        
+                        <!-- Bottom Row -->
+                        <div class="widget-row">
+                            <!-- EURUSD Widget -->
+                            <div class="tradingview-widget-container floating-widget">
+                              <div class="tradingview-widget-container__widget"></div>
+                              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+                              {
+                              "symbol": "OANDA:EURUSD",
+                              "colorTheme": "dark",
+                              "isTransparent": false,
+                              "locale": "en",
+                              "width": 350
+                              }
+                              </script>
                             </div>
-                            <div class="metric">
-                                <span class="metric-label">Win Rate</span>
-                                <span class="metric-value">78.5%</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-label">Active Strategies</span>
-                                <span class="metric-value">12</span>
+                            
+                            <!-- USDJPY Widget -->
+                            <div class="tradingview-widget-container floating-widget">
+                              <div class="tradingview-widget-container__widget"></div>
+                              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+                              {
+                              "symbol": "OANDA:USDJPY",
+                              "colorTheme": "dark",
+                              "isTransparent": false,
+                              "locale": "en",
+                              "width": 350
+                              }
+                              </script>
                             </div>
                         </div>
                     </div>
