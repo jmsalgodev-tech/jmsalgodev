@@ -568,7 +568,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function formatWhatsAppMessage(data) {
-        let message = `Hello JMS AlogDEV Team! 👋\n\n`;
+        let message = `Hello JMS AlgoDEV Team! 👋\n\n`;
         message += `I'm interested in your services. Here are my details:\n\n`;
         message += `📝 *Name:* ${data.name}\n`;
         message += `📧 *Email:* ${data.email}\n`;
@@ -590,7 +590,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function formatEmailData(data) {
         const subject = `New Contact Form Submission - ${data.service || 'General Inquiry'}`;
         
-        let body = `Dear JMS AlogDEV Team,\n\n`;
+        let body = `Dear JMS AlgoDEV Team,\n\n`;
         body += `I am interested in your services and would like to get in touch.\n\n`;
         body += `Contact Information:\n`;
         body += `Name: ${data.name}\n`;
